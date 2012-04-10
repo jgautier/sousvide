@@ -43,17 +43,21 @@ lcd.setCursor(1,1);
 sensors.requestTemperatures(); // Send the command to get temperatures
 lcd.print("Current: ");
 double currentTemp = sensors.getTempFByIndex(0);
-lcd.print(currentTemp);
+lcd.print(sensors.getTempFByIndex(0));
 pot_value = analogRead(POT_PIN);
 lcd.setCursor(2,1);
 lcd.print("Target: ");
 lcd.setCursor(2,10);
 lcd.print("    ");
 lcd.setCursor(2,10);
-lcd.print(((pot_value/1023)*100)+100);
+//lcd.print(((pot_value/1023)*100)+100);
 double targetTemp = ((pot_value/1023)*100)+100;
 lcd.print(targetTemp);
-if(
+if(currentTemp < targetTemp){
+  digitalWrite(4,1);
+} else {
+  digitalWrite(4,0);
+}  
 }/* --(end main loop )-- */
 
 /* ( THE END ) */
